@@ -1,5 +1,5 @@
 {
-    "name": "tesla/tesla-api-sdk",
+    "name": "tesla-api/tesla-api-sdk",
     "description": "Tesla-API SDK",
     "type": "library",
     "keywords": [],
