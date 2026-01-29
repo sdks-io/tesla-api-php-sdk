@@ -15,7 +15,7 @@ use TeslaFleetManagementApiLib\Models\OAuthToken;
 /**
  * Interface for defining the behavior of Authentication.
  */
-interface Oauth2Credentials
+interface ThirdpartytokenCredentials
 {
     /**
      * String value for oAuthClientId.
@@ -38,7 +38,7 @@ interface Oauth2Credentials
     public function getOAuthToken(): ?OAuthToken;
 
     /**
-     * OAuthScopeOauth2 value for oAuthScopes.
+     * OAuthScopeThirdpartytoken value for oAuthScopes.
      */
     public function getOAuthScopes(): ?array;
 

@@ -1,11 +1,11 @@
 
-# O Auth Scope Oauth 2
+# O Auth Scope Thirdpartytoken
 
 OAuth 2 scopes supported by the API
 
 ## Enumeration
 
-`OAuthScopeOauth2`
+`OAuthScopeThirdpartytoken`
 
 ## Fields
 

@@ -18,7 +18,7 @@ The following parameters are configurable for the API Client:
 | loggingConfiguration | [`LoggingConfigurationBuilder`](../doc/logging-configuration-builder.md) | Represents the logging configurations for API calls |
 | proxyConfiguration | [`ProxyConfigurationBuilder`](../doc/proxy-configuration-builder.md) | Represents the proxy configurations for API calls |
 | bearerAuthCredentials | [`BearerAuthCredentials`](auth/oauth-2-bearer-token.md) | The Credentials Setter for OAuth 2 Bearer token |
-| oauth2Credentials | [`Oauth2Credentials`](auth/oauth-2-authorization-code-grant.md) | The Credentials Setter for OAuth 2 Authorization Code Grant |
+| thirdpartytokenCredentials | [`ThirdpartytokenCredentials`](auth/oauth-2-authorization-code-grant.md) | The Credentials Setter for OAuth 2 Authorization Code Grant |
 
 The API client can be initialized as follows:
 
@@ -29,8 +29,8 @@ use TeslaFleetManagementApiLib\Logging\ResponseLoggingConfigurationBuilder;
 use Psr\Log\LogLevel;
 use TeslaFleetManagementApiLib\Environment;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentialsBuilder;
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
-use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeThirdpartytoken;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
@@ -39,16 +39,16 @@ $client = TeslaFleetManagementApiClientBuilder::init()
             'AccessToken'
         )
     )
-    ->oauth2Credentials(
-        Oauth2CredentialsBuilder::init(
+    ->thirdpartytokenCredentials(
+        ThirdpartytokenCredentialsBuilder::init(
             'OAuthClientId',
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
             ->oAuthScopes(
                 [
-                    OAuthScopeOauth2::OPENID,
-                    OAuthScopeOauth2::OFFLINE_ACCESS
+                    OAuthScopeThirdpartytoken::OPENID,
+                    OAuthScopeThirdpartytoken::OFFLINE_ACCESS
                 ]
             )
     )

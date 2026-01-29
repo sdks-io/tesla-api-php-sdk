@@ -33,7 +33,7 @@ class OAuthAuthorizationController extends BaseController
      *
      * @return ApiResponse Response from the API call
      */
-    public function requestTokenOauth2(
+    public function requestTokenThirdpartytoken(
         string $authorization,
         string $code,
         string $redirectUri,
@@ -78,7 +78,7 @@ class OAuthAuthorizationController extends BaseController
      *
      * @return ApiResponse Response from the API call
      */
-    public function refreshTokenOauth2(
+    public function refreshTokenThirdpartytoken(
         string $authorization,
         string $refreshToken,
         ?string $scope = null,

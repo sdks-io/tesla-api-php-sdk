@@ -15,9 +15,9 @@ use Core\Utils\CoreHelper;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentials;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentialsBuilder;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthManager;
-use TeslaFleetManagementApiLib\Authentication\Oauth2Credentials;
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
-use TeslaFleetManagementApiLib\Authentication\Oauth2Manager;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentials;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenManager;
 use TeslaFleetManagementApiLib\Controllers\ChargingController;
 use TeslaFleetManagementApiLib\Controllers\EnergyController;
 use TeslaFleetManagementApiLib\Controllers\OAuthAuthorizationController;
@@ -51,7 +51,7 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
 
     private $bearerAuthManager;
 
-    private $oauth2Manager;
+    private $thirdpartytokenManager;
 
     private $loggingConfigurationBuilder;
 
@@ -71,7 +71,7 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
     {
         $this->config = array_merge(ConfigurationDefaults::_ALL, CoreHelper::clone($config));
         $this->bearerAuthManager = new BearerAuthManager($this->config);
-        $this->oauth2Manager = new Oauth2Manager($this->config);
+        $this->thirdpartytokenManager = new ThirdpartytokenManager($this->config);
         $this->validateConfig();
         $loggingConfiguration = null;
         if ($this->config['loggingConfiguration'] instanceof LoggingConfigurationBuilder) {
@@ -85,12 +85,14 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
             ->converter(new CompatibilityConverter())
             ->jsonHelper(ApiHelper::getJsonHelper())
             ->apiCallback($this->config['httpCallback'] ?? null)
-            ->userAgent('PHP SDK, Version: 1.0.2, on OS {os-info}')
+            ->userAgent('PHP SDK, Version: 1.0.3, on OS {os-info}')
             ->serverUrls(self::ENVIRONMENT_MAP[$this->getEnvironment()], Server::DEFAULT_)
-            ->authManagers(['bearerAuth' => $this->bearerAuthManager, 'oauth2' => $this->oauth2Manager])
+            ->authManagers(
+                ['bearerAuth' => $this->bearerAuthManager, 'thirdpartytoken' => $this->thirdpartytokenManager]
+            )
             ->loggingConfiguration($loggingConfiguration)
             ->build();
-        $this->oauth2Manager->setClient($this->client);
+        $this->thirdpartytokenManager->setClient($this->client);
     }
 
     /**
@@ -119,9 +121,9 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
             $builder->bearerAuthCredentials($bearerAuth);
         }
 
-        $oauth2 = $this->getOauth2CredentialsBuilder();
-        if ($oauth2 != null) {
-            $builder->oauth2Credentials($oauth2);
+        $thirdpartytoken = $this->getThirdpartytokenCredentialsBuilder();
+        if ($thirdpartytoken != null) {
+            $builder->thirdpartytokenCredentials($thirdpartytoken);
         }
         $loggingConfigurationBuilder = $this->getLoggingConfigurationBuilder();
         if ($loggingConfigurationBuilder != null) {
@@ -193,25 +195,27 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
         return BearerAuthCredentialsBuilder::init($this->bearerAuthManager->getAccessToken());
     }
 
-    public function getOauth2Credentials(): Oauth2Credentials
+    public function getThirdpartytokenCredentials(): ThirdpartytokenCredentials
     {
-        return $this->oauth2Manager;
+        return $this->thirdpartytokenManager;
     }
 
-    public function getOauth2CredentialsBuilder(): ?Oauth2CredentialsBuilder
+    public function getThirdpartytokenCredentialsBuilder(): ?ThirdpartytokenCredentialsBuilder
     {
         if (
-            empty($this->oauth2Manager->getOAuthClientId()) &&
-            empty($this->oauth2Manager->getOAuthClientSecret()) &&
-            empty($this->oauth2Manager->getOAuthRedirectUri())
+            empty($this->thirdpartytokenManager->getOAuthClientId()) &&
+            empty($this->thirdpartytokenManager->getOAuthClientSecret()) &&
+            empty($this->thirdpartytokenManager->getOAuthRedirectUri())
         ) {
             return null;
         }
-        return Oauth2CredentialsBuilder::init(
-            $this->oauth2Manager->getOAuthClientId(),
-            $this->oauth2Manager->getOAuthClientSecret(),
-            $this->oauth2Manager->getOAuthRedirectUri()
-        )->oAuthToken($this->oauth2Manager->getOAuthToken())->oAuthScopes($this->oauth2Manager->getOAuthScopes());
+        return ThirdpartytokenCredentialsBuilder::init(
+            $this->thirdpartytokenManager->getOAuthClientId(),
+            $this->thirdpartytokenManager->getOAuthClientSecret(),
+            $this->thirdpartytokenManager->getOAuthRedirectUri()
+        )
+            ->oAuthToken($this->thirdpartytokenManager->getOAuthToken())
+            ->oAuthScopes($this->thirdpartytokenManager->getOAuthScopes());
     }
 
     public function getLoggingConfigurationBuilder(): ?LoggingConfigurationBuilder
@@ -278,9 +282,9 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
     {
         $builder = TeslaFleetManagementApiClientBuilder::init();
 
-        $oauth2 = $this->getOauth2CredentialsBuilder();
-        if ($oauth2 != null) {
-            $builder->oauth2Credentials($oauth2);
+        $thirdpartytoken = $this->getThirdpartytokenCredentialsBuilder();
+        if ($thirdpartytoken != null) {
+            $builder->thirdpartytokenCredentials($thirdpartytoken);
         }
     }
 

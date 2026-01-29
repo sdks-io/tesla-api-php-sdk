@@ -27,7 +27,7 @@ use TeslaFleetManagementApiLib\ConfigurationDefaults;
 /**
  * Utility class for OAuth 2 authorization and token management
  */
-class Oauth2Manager extends CoreAuth implements Oauth2Credentials
+class ThirdpartytokenManager extends CoreAuth implements ThirdpartytokenCredentials
 {
     private $client;
 
@@ -97,7 +97,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
     }
 
     /**
-     * OAuthScopeOauth2 value for oAuthScopes.
+     * OAuthScopeThirdpartytoken value for oAuthScopes.
      */
     public function getOAuthScopes(): ?array
     {
@@ -127,7 +127,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
      */
     public function getOAuthClockSkew(): int
     {
-        return $this->config['oauth2-ClockSkew'] ?? ConfigurationDefaults::OAUTH_2_CLOCK_SKEW;
+        return $this->config['thirdpartytoken-ClockSkew'] ?? ConfigurationDefaults::THIRDPARTYTOKEN_CLOCK_SKEW;
     }
 
     /**
@@ -161,7 +161,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
     public function fetchToken(string $authorizationCode, ?array $additionalParams = null): OAuthToken
     {
         //send request for access token
-        $response = $this->oAuthApi->requestTokenOauth2(
+        $response = $this->oAuthApi->requestTokenThirdpartytoken(
             $this->buildBasicHeader(),
             $authorizationCode,
             $this->getOAuthRedirectUri() ?? "",
@@ -185,7 +185,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
     public function refreshToken(?array $additionalParams = null): OAuthToken
     {
         //send request for token refresh
-        $response = $this->oAuthApi->refreshTokenOauth2(
+        $response = $this->oAuthApi->refreshTokenThirdpartytoken(
             $this->buildBasicHeader(),
             $this->getOAuthToken()->getRefreshToken() ?? "",
             implode(' ', $this->getOAuthScopes() ?? []),

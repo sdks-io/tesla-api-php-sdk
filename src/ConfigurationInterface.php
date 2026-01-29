@@ -13,8 +13,8 @@ namespace TeslaFleetManagementApiLib;
 use CoreInterfaces\Http\HttpConfigurations;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentials;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentialsBuilder;
-use TeslaFleetManagementApiLib\Authentication\Oauth2Credentials;
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentials;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
 use TeslaFleetManagementApiLib\Logging\LoggingConfigurationBuilder;
 use TeslaFleetManagementApiLib\Proxy\ProxyConfigurationBuilder;
 
@@ -39,14 +39,14 @@ interface ConfigurationInterface extends HttpConfigurations
     public function getBearerAuthCredentialsBuilder(): ?BearerAuthCredentialsBuilder;
 
     /**
-     * Get the credentials to use with Oauth2
+     * Get the credentials to use with Thirdpartytoken
      */
-    public function getOauth2Credentials(): Oauth2Credentials;
+    public function getThirdpartytokenCredentials(): ThirdpartytokenCredentials;
 
     /**
-     * Get the credentials builder instance to update credentials for Oauth2
+     * Get the credentials builder instance to update credentials for Thirdpartytoken
      */
-    public function getOauth2CredentialsBuilder(): ?Oauth2CredentialsBuilder;
+    public function getThirdpartytokenCredentialsBuilder(): ?ThirdpartytokenCredentialsBuilder;
 
     /**
      * Represents the logging configurations for API calls.

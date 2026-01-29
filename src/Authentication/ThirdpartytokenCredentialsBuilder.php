@@ -11,13 +11,13 @@ declare(strict_types=1);
 namespace TeslaFleetManagementApiLib\Authentication;
 
 use Core\Utils\CoreHelper;
-use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
+use TeslaFleetManagementApiLib\Models\OAuthScopeThirdpartytoken;
 use TeslaFleetManagementApiLib\Models\OAuthToken;
 
 /**
- * Utility class for initializing Oauth2 security credentials.
+ * Utility class for initializing Thirdpartytoken security credentials.
  */
-class Oauth2CredentialsBuilder
+class ThirdpartytokenCredentialsBuilder
 {
     /**
      * @var array
@@ -30,7 +30,7 @@ class Oauth2CredentialsBuilder
     }
 
     /**
-     * Initializer for Oauth2CredentialsBuilder
+     * Initializer for ThirdpartytokenCredentialsBuilder
      *
      * @param string $oAuthClientId
      * @param string $oAuthClientSecret
@@ -106,7 +106,7 @@ class Oauth2CredentialsBuilder
      */
     public function oAuthScopes(?array $oAuthScopes): self
     {
-        OAuthScopeOauth2::checkValue($oAuthScopes);
+        OAuthScopeThirdpartytoken::checkValue($oAuthScopes);
         $this->config['oAuthScopes'] = $oAuthScopes;
         return $this;
     }
@@ -120,7 +120,7 @@ class Oauth2CredentialsBuilder
      */
     public function oAuthClockSkew(int $oAuthClockSkew): self
     {
-        $this->config['oauth2-ClockSkew'] = $oAuthClockSkew;
+        $this->config['thirdpartytoken-ClockSkew'] = $oAuthClockSkew;
         return $this;
     }
 

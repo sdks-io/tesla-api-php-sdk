@@ -56,7 +56,7 @@ class ConfigurationDefaults
         'auth' => ['user' => '', 'pass' => '', 'method' => CURLAUTH_BASIC]
     ];
 
-    public const OAUTH_2_CLOCK_SKEW = 0;
+    public const THIRDPARTYTOKEN_CLOCK_SKEW = 0;
 
     public const LOGGER_ALLOWED_LEVELS = [
         LogLevel::EMERGENCY,
@@ -105,7 +105,7 @@ class ConfigurationDefaults
         'oAuthRedirectUri' => self::O_AUTH_REDIRECT_URI,
         'oAuthToken' => self::O_AUTH_TOKEN,
         'oAuthScopes' => self::O_AUTH_SCOPES,
-        'oauth2-ClockSkew' => self::OAUTH_2_CLOCK_SKEW,
+        'thirdpartytoken-ClockSkew' => self::THIRDPARTYTOKEN_CLOCK_SKEW,
         'loggingConfiguration' => null,
         'proxyConfiguration' => self::PROXY_CONFIGURATION
     ];

@@ -3,7 +3,7 @@
 
 
 
-Documentation for accessing and setting credentials for oauth2.
+Documentation for accessing and setting credentials for thirdpartytoken.
 
 ## Auth Credentials
 
@@ -18,7 +18,7 @@ Documentation for accessing and setting credentials for oauth2.
 
 
 
-**Note:** Auth credentials can be set using `Oauth2CredentialsBuilder::init()` in `oauth2Credentials` method in the client builder and accessed through `getOauth2Credentials` method in the client instance.
+**Note:** Auth credentials can be set using `ThirdpartytokenCredentialsBuilder::init()` in `thirdpartytokenCredentials` method in the client builder and accessed through `getThirdpartytokenCredentials` method in the client instance.
 
 ## Usage Example
 
@@ -27,21 +27,21 @@ Documentation for accessing and setting credentials for oauth2.
 You must initialize the client with *OAuth 2.0 Authorization Code Grant* credentials as shown in the following code snippet.
 
 ```php
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
-use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeThirdpartytoken;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
-    ->oauth2Credentials(
-        Oauth2CredentialsBuilder::init(
+    ->thirdpartytokenCredentials(
+        ThirdpartytokenCredentialsBuilder::init(
             'OAuthClientId',
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
             ->oAuthScopes(
                 [
-                    OAuthScopeOauth2::OPENID,
-                    OAuthScopeOauth2::OFFLINE_ACCESS
+                    OAuthScopeThirdpartytoken::OPENID,
+                    OAuthScopeThirdpartytoken::OFFLINE_ACCESS
                 ]
             )
     )
@@ -57,7 +57,7 @@ Your application must obtain user authorization before it can execute an endpoin
 To obtain user's consent, you must redirect the user to the authorization page.The `buildAuthorizationUrl()` method creates the URL to the authorization page. You must have initialized the client with scopes for which you need permission to access.
 
 ```php
-$authUrl = $client->getOauth2Credentials()->buildAuthorizationUrl();
+$authUrl = $client->getThirdpartytokenCredentials()->buildAuthorizationUrl();
 header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
 ```
 
@@ -83,11 +83,11 @@ After the server receives the code, it can exchange this for an *access token*. 
 
 ```php
 try {
-    $token = $client->getOauth2Credentials()->fetchToken($_GET['code']);
+    $token = $client->getThirdpartytokenCredentials()->fetchToken($_GET['code']);
     // re-build the client with oauth token
     $client = $client
         ->toBuilder()
-        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
+        ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
         ->build();
 } catch (TeslaFleetManagementApiLib\Exceptions\ApiException $e) {
     // handle exception
@@ -96,7 +96,7 @@ try {
 
 ### Scopes
 
-Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the [`OAuthScopeOauth2`](../../doc/models/o-auth-scope-oauth-2.md) enumeration.
+Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the [`OAuthScopeThirdpartytoken`](../../doc/models/o-auth-scope-thirdpartytoken.md) enumeration.
 
 | Scope Name | Description |
 |  --- | --- |
@@ -117,13 +117,13 @@ Scopes enable your application to only request access to the resources it needs 
 An access token may expire after sometime. To extend its lifetime, you must refresh the token.
 
 ```php
-if ($client->getOauth2Credentials()->isTokenExpired()) {
+if ($client->getThirdpartytokenCredentials()->isTokenExpired()) {
     try {
-        $token = $client->getOauth2Credentials()->refreshToken();
+        $token = $client->getThirdpartytokenCredentials()->refreshToken();
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
+            ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
             ->build();
     } catch (TeslaFleetManagementApiLib\Exceptions\ApiException $e) {
         // handle exception
@@ -139,7 +139,7 @@ It is recommended that you store the access token for reuse.
 
 ```php
 // store token
-$_SESSION['access_token'] = $client->getOauth2Credentials()->getOAuthToken();
+$_SESSION['access_token'] = $client->getThirdpartytokenCredentials()->getOAuthToken();
 ```
 
 ### Creating a client from a stored token
@@ -151,7 +151,10 @@ To authorize a client using a stored access token, just set the access token in 
 $token = $_SESSION['access_token'];
 
 // re-build the client with oauth token
-$client = $client->toBuilder()->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))->build();
+$client = $client
+    ->toBuilder()
+    ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
+    ->build();
 ```
 
 ### Complete example
@@ -169,21 +172,21 @@ use TeslaFleetManagementApiLib\Logging\RequestLoggingConfigurationBuilder;
 use TeslaFleetManagementApiLib\Logging\ResponseLoggingConfigurationBuilder;
 use Psr\Log\LogLevel;
 use TeslaFleetManagementApiLib\Environment;
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
-use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeThirdpartytoken;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
-    ->oauth2Credentials(
-        Oauth2CredentialsBuilder::init(
+    ->thirdpartytokenCredentials(
+        ThirdpartytokenCredentialsBuilder::init(
             'OAuthClientId',
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
             ->oAuthScopes(
                 [
-                    OAuthScopeOauth2::OPENID,
-                    OAuthScopeOauth2::OFFLINE_ACCESS
+                    OAuthScopeThirdpartytoken::OPENID,
+                    OAuthScopeThirdpartytoken::OFFLINE_ACCESS
                 ]
             )
     )
@@ -203,21 +206,21 @@ if (isset($_SESSION['access_token'])) {
     // re-build the client with oauth token
     $client = $client
         ->toBuilder()
-        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
+        ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
         ->build();
 } else {
     try {
         // build authorization url to redirect the user
-        $oAuthRedirectUri = $client->getOauth2Credentials()->buildAuthorizationUrl();
+        $oAuthRedirectUri = $client->getThirdpartytokenCredentials()->buildAuthorizationUrl();
         // redirect the user to $oAuthRedirectUri and get a code after the user consent
         header('Location: ' . filter_var($oAuthRedirectUri, FILTER_SANITIZE_URL));
 
         // fetch an oauth token to authorize the client using the stored code
-        $token = $client->getOauth2Credentials()->fetchToken($_GET['code']);
+        $token = $client->getThirdpartytokenCredentials()->fetchToken($_GET['code']);
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
+            ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
             ->build();
 
         // store token
@@ -228,14 +231,14 @@ if (isset($_SESSION['access_token'])) {
 }
 
 // check if token gets expired, then try to refresh the token
-if ($client->getOauth2Credentials()->isTokenExpired()) {
+if ($client->getThirdpartytokenCredentials()->isTokenExpired()) {
     try {
         // refresh the token
-        $token = $client->getOauth2Credentials()->refreshToken();
+        $token = $client->getThirdpartytokenCredentials()->refreshToken();
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
+            ->thirdpartytokenCredentials($client->getThirdpartytokenCredentialsBuilder()->oAuthToken($token))
             ->build();
 
         // update the cached token

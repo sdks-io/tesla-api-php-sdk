@@ -17,7 +17,7 @@ use stdClass;
 /**
  * OAuth 2 scopes supported by the API
  */
-class OAuthScopeOauth2
+class OAuthScopeThirdpartytoken
 {
     /**
      * Allow Tesla customers to sign in to the application with their Tesla credentials.
@@ -106,6 +106,6 @@ class OAuthScopeOauth2
         if (CoreHelper::checkValueOrValuesInList($value, self::_ALL_VALUES)) {
             return $value;
         }
-        throw new Exception("$value is invalid for OAuthScopeOauth2.");
+        throw new Exception("$value is invalid for OAuthScopeThirdpartytoken.");
     }
 }

@@ -13,7 +13,7 @@ namespace TeslaFleetManagementApiLib;
 use Core\Types\Sdk\CoreCallback;
 use Core\Utils\CoreHelper;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentialsBuilder;
-use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
+use TeslaFleetManagementApiLib\Authentication\ThirdpartytokenCredentialsBuilder;
 use TeslaFleetManagementApiLib\Logging\LoggingConfigurationBuilder;
 use TeslaFleetManagementApiLib\Proxy\ProxyConfigurationBuilder;
 
@@ -117,9 +117,9 @@ class TeslaFleetManagementApiClientBuilder
         return $this;
     }
 
-    public function oauth2Credentials(Oauth2CredentialsBuilder $oauth2): self
+    public function thirdpartytokenCredentials(ThirdpartytokenCredentialsBuilder $thirdpartytoken): self
     {
-        $this->config = array_merge($this->config, $oauth2->getConfiguration());
+        $this->config = array_merge($this->config, $thirdpartytoken->getConfiguration());
         return $this;
     }
 

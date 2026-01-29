@@ -27,7 +27,7 @@ class ChargingController extends BaseController
     public function getChargingHistory(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/history')
-            ->auth(Auth::and('bearerAuth', 'oauth2'));
+            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'));
 
         $_resHandler = $this->responseHandler()->type(ChargingHistoryResponse::class)->returnApiResponse();
 
@@ -44,7 +44,7 @@ class ChargingController extends BaseController
     public function getChargingInvoice(string $id): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/invoice/{id}')
-            ->auth(Auth::and('bearerAuth', 'oauth2'))
+            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'))
             ->parameters(TemplateParam::init('id', $id)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -60,7 +60,7 @@ class ChargingController extends BaseController
     public function getChargingSessions(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/sessions')
-            ->auth(Auth::and('bearerAuth', 'oauth2'));
+            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'));
 
         $_resHandler = $this->responseHandler()->type(ChargingSessionsResponse::class)->returnApiResponse();
 
