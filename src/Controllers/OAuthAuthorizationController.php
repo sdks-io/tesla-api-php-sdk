@@ -15,12 +15,12 @@ use Core\Request\Parameters\FormParam;
 use Core\Request\Parameters\HeaderParam;
 use Core\Response\Types\ErrorType;
 use CoreInterfaces\Core\Request\RequestMethod;
-use TeslaFleetManagementApiLib\Exceptions\OauthProviderException;
+use TeslaFleetManagementApiLib\Exceptions\OAuthProviderException;
 use TeslaFleetManagementApiLib\Http\ApiResponse;
-use TeslaFleetManagementApiLib\Models\OauthToken;
+use TeslaFleetManagementApiLib\Models\OAuthToken;
 use TeslaFleetManagementApiLib\Server;
 
-class OauthAuthorizationController extends BaseController
+class OAuthAuthorizationController extends BaseController
 {
     /**
      * Create a new OAuth 2 token.
@@ -52,16 +52,16 @@ class OauthAuthorizationController extends BaseController
         $_resHandler = $this->responseHandler()
             ->throwErrorOn(
                 '400',
-                ErrorType::init('OAuth 2 provider returned an error.', OauthProviderException::class)
+                ErrorType::init('OAuth 2 provider returned an error.', OAuthProviderException::class)
             )
             ->throwErrorOn(
                 '401',
                 ErrorType::init(
                     'OAuth 2 provider says client authentication failed.',
-                    OauthProviderException::class
+                    OAuthProviderException::class
                 )
             )
-            ->type(OauthToken::class)
+            ->type(OAuthToken::class)
             ->returnApiResponse();
 
         return $this->execute($_reqBuilder, $_resHandler);
@@ -97,16 +97,16 @@ class OauthAuthorizationController extends BaseController
         $_resHandler = $this->responseHandler()
             ->throwErrorOn(
                 '400',
-                ErrorType::init('OAuth 2 provider returned an error.', OauthProviderException::class)
+                ErrorType::init('OAuth 2 provider returned an error.', OAuthProviderException::class)
             )
             ->throwErrorOn(
                 '401',
                 ErrorType::init(
                     'OAuth 2 provider says client authentication failed.',
-                    OauthProviderException::class
+                    OAuthProviderException::class
                 )
             )
-            ->type(OauthToken::class)
+            ->type(OAuthToken::class)
             ->returnApiResponse();
 
         return $this->execute($_reqBuilder, $_resHandler);

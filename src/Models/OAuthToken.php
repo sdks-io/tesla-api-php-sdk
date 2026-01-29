@@ -15,7 +15,7 @@ use stdClass;
 /**
  * OAuth 2 Authorization endpoint response
  */
-class OauthToken implements \JsonSerializable
+class OAuthToken implements \JsonSerializable
 {
     /**
      * @var string

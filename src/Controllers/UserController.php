@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace TeslaFleetManagementApiLib\Controllers;
 
+use Core\Authentication\Auth;
 use CoreInterfaces\Core\Request\RequestMethod;
 use TeslaFleetManagementApiLib\Http\ApiResponse;
 use TeslaFleetManagementApiLib\Models\BackupResponse;
@@ -24,7 +25,8 @@ class UserController extends BaseController
      */
     public function getCustomFeatureFlagsForAUser(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/feature_config')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/feature_config')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(BackupResponse::class)->returnApiResponse();
 
@@ -36,7 +38,8 @@ class UserController extends BaseController
      */
     public function getSummaryOfAUserSAccount(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/me')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/me')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(MeResponse::class)->returnApiResponse();
 
@@ -48,7 +51,8 @@ class UserController extends BaseController
      */
     public function getActiveOrdersForAUser(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/orders')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/orders')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(OrdersResponse::class)->returnApiResponse();
 
@@ -60,7 +64,8 @@ class UserController extends BaseController
      */
     public function getUserSRegionAndFleetApiBaseUrl(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/region')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/region')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(RegionResponse::class)->returnApiResponse();
 

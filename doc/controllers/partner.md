@@ -12,17 +12,23 @@ $partnerController = $client->getPartnerController();
 
 ## Methods
 
-* [Get VINs With Fleet Telemetry Errors](../../doc/controllers/partner.md#get-vins-with-fleet-telemetry-errors)
+* [Get Vins With Fleet Telemetry Errors](../../doc/controllers/partner.md#get-vins-with-fleet-telemetry-errors)
 * [Get Recent Fleet Telemetry Errors](../../doc/controllers/partner.md#get-recent-fleet-telemetry-errors)
 * [Get Public Key for a Domain](../../doc/controllers/partner.md#get-public-key-for-a-domain)
 * [Register a Partner Account](../../doc/controllers/partner.md#register-a-partner-account)
 
 
-# Get VINs With Fleet Telemetry Errors
+# Get Vins With Fleet Telemetry Errors
 
 ```php
 function getVinsWithFleetTelemetryErrors(): ApiResponse
 ```
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -40,6 +46,12 @@ $apiResponse = $partnerController->getVinsWithFleetTelemetryErrors();
 ```php
 function getRecentFleetTelemetryErrors(): ApiResponse
 ```
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -63,6 +75,12 @@ function getPublicKeyForADomain(string $domain): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `domain` | `string` | Query, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -88,6 +106,12 @@ function registerAPartnerAccount(RegisterPartnerRequest $body): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`RegisterPartnerRequest`](../../doc/models/register-partner-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 

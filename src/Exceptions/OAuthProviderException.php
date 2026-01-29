@@ -15,7 +15,7 @@ use TeslaFleetManagementApiLib\ApiHelper;
 /**
  * OAuth 2 Authorization endpoint exception.
  */
-class OauthProviderException extends ApiException
+class OAuthProviderException extends ApiException
 {
     /**
      * @var string
@@ -63,7 +63,7 @@ class OauthProviderException extends ApiException
      *
      * @required
      * @maps error
-     * @factory \TeslaFleetManagementApiLib\Models\OauthProviderError::checkValue
+     * @factory \TeslaFleetManagementApiLib\Models\OAuthProviderError::checkValue
      */
     public function setError(string $error): void
     {
@@ -115,14 +115,14 @@ class OauthProviderException extends ApiException
     }
 
     /**
-     * Converts the OauthProviderException object to a human-readable string representation.
+     * Converts the OAuthProviderException object to a human-readable string representation.
      *
-     * @return string The string representation of the OauthProviderException object.
+     * @return string The string representation of the OAuthProviderException object.
      */
     public function __toString(): string
     {
         return ApiHelper::stringify(
-            'OauthProviderException',
+            'OAuthProviderException',
             [
                 'error' => $this->error,
                 'errorDescription' => $this->errorDescription,

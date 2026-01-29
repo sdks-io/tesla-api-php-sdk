@@ -47,6 +47,8 @@ class ConfigurationDefaults
 
     public const O_AUTH_TOKEN = null;
 
+    public const O_AUTH_SCOPES = null;
+
     public const PROXY_CONFIGURATION = [
         'port' => 0,
         'tunnel' => false,
@@ -98,10 +100,11 @@ class ConfigurationDefaults
         'httpMethodsToRetry' => self::HTTP_METHODS_TO_RETRY,
         'environment' => self::ENVIRONMENT,
         'accessToken' => self::ACCESS_TOKEN,
-        'oauthClientId' => self::O_AUTH_CLIENT_ID,
-        'oauthClientSecret' => self::O_AUTH_CLIENT_SECRET,
-        'oauthRedirectUri' => self::O_AUTH_REDIRECT_URI,
-        'oauthToken' => self::O_AUTH_TOKEN,
+        'oAuthClientId' => self::O_AUTH_CLIENT_ID,
+        'oAuthClientSecret' => self::O_AUTH_CLIENT_SECRET,
+        'oAuthRedirectUri' => self::O_AUTH_REDIRECT_URI,
+        'oAuthToken' => self::O_AUTH_TOKEN,
+        'oAuthScopes' => self::O_AUTH_SCOPES,
         'oauth2-ClockSkew' => self::OAUTH_2_CLOCK_SKEW,
         'loggingConfiguration' => null,
         'proxyConfiguration' => self::PROXY_CONFIGURATION

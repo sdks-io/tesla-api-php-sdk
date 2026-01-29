@@ -18,9 +18,9 @@ $energyController = $client->getEnergyController();
 * [Get Live Site Status](../../doc/controllers/energy.md#get-live-site-status)
 * [Set Site Mode Autonomous or Self Consumption](../../doc/controllers/energy.md#set-site-mode-autonomous-or-self-consumption)
 * [Allow Disallow Charging From the Grid and Exporting Energy to the Grid](../../doc/controllers/energy.md#allow-disallow-charging-from-the-grid-and-exporting-energy-to-the-grid)
-* [Adjust Site S Off-Grid Vehicle Charging Reserve](../../doc/controllers/energy.md#adjust-site-s-off-grid-vehicle-charging-reserve)
+* [Adjust Site S Off Grid Vehicle Charging Reserve](../../doc/controllers/energy.md#adjust-site-s-off-grid-vehicle-charging-reserve)
 * [Update Storm Watch Participation](../../doc/controllers/energy.md#update-storm-watch-participation)
-* [Update Time-of-Use TOU Settings](../../doc/controllers/energy.md#update-time-of-use-tou-settings)
+* [Update Time of Use Tou Settings](../../doc/controllers/energy.md#update-time-of-use-tou-settings)
 * [Get User Products Vehicles Energy Sites](../../doc/controllers/energy.md#get-user-products-vehicles-energy-sites)
 * [Get Site Information Assets Settings Features](../../doc/controllers/energy.md#get-site-information-assets-settings-features)
 
@@ -37,6 +37,12 @@ function adjustSiteSBackupReserve(string $energySiteId, BackupRequest $body): Ap
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | [`BackupRequest`](../../doc/models/backup-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -81,6 +87,12 @@ function getBackupOrEnergyHistory(
 | `endDate` | `DateTime` | Query, Required | - |
 | `period` | `?string` | Query, Optional | - |
 | `timeZone` | `?string` | Query, Optional | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -128,6 +140,12 @@ function getWallConnectorChargingHistory(
 | `endDate` | `DateTime` | Query, Required | - |
 | `timeZone` | `?string` | Query, Optional | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`ChargeHistoryResponse`](../../doc/models/charge-history-response.md).
@@ -164,6 +182,12 @@ function getLiveSiteStatus(string $energySiteId): ApiResponse
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`LiveStatusResponse`](../../doc/models/live-status-response.md).
@@ -189,6 +213,12 @@ function setSiteModeAutonomousOrSelfConsumption(string $energySiteId, OperationR
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | [`OperationRequest`](../../doc/models/operation-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -226,6 +256,12 @@ function allowDisallowChargingFromTheGridAndExportingEnergyToTheGrid(
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | `?array` | Body, Optional | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`GenericUpdateResponse`](../../doc/models/generic-update-response.md).
@@ -239,7 +275,7 @@ $apiResponse = $energyController->allowDisallowChargingFromTheGridAndExportingEn
 ```
 
 
-# Adjust Site S Off-Grid Vehicle Charging Reserve
+# Adjust Site S Off Grid Vehicle Charging Reserve
 
 ```php
 function adjustSiteSOffGridVehicleChargingReserve(
@@ -254,6 +290,12 @@ function adjustSiteSOffGridVehicleChargingReserve(
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | [`OffGridVehicleChargingReserveRequest`](../../doc/models/off-grid-vehicle-charging-reserve-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -288,6 +330,12 @@ function updateStormWatchParticipation(string $energySiteId, StormModeRequest $b
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | [`StormModeRequest`](../../doc/models/storm-mode-request.md) | Body, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`GenericUpdateResponse`](../../doc/models/generic-update-response.md).
@@ -308,7 +356,7 @@ $apiResponse = $energyController->updateStormWatchParticipation(
 ```
 
 
-# Update Time-of-Use TOU Settings
+# Update Time of Use Tou Settings
 
 ```php
 function updateTimeOfUseTouSettings(string $energySiteId, TimeOfUseSettingsRequest $body): ApiResponse
@@ -320,6 +368,12 @@ function updateTimeOfUseTouSettings(string $energySiteId, TimeOfUseSettingsReque
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
 | `body` | [`TimeOfUseSettingsRequest`](../../doc/models/time-of-use-settings-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -347,6 +401,12 @@ $apiResponse = $energyController->updateTimeOfUseTouSettings(
 function getUserProductsVehiclesEnergySites(): ApiResponse
 ```
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`ProductsResponse`](../../doc/models/products-response.md).
@@ -369,6 +429,12 @@ function getSiteInformationAssetsSettingsFeatures(string $energySiteId): ApiResp
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `energySiteId` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 

@@ -25,6 +25,12 @@ Returns the paginated charging history for the authenticated account.
 function getChargingHistory(): ApiResponse
 ```
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`ChargingHistoryResponse`](../../doc/models/charging-history-response.md).
@@ -50,6 +56,12 @@ function getChargingInvoice(string $id): ApiResponse
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | Charging session invoice identifier |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type `mixed`.
@@ -70,6 +82,12 @@ Returns charging session information. Only available for business fleet owners.
 ```php
 function getChargingSessions(): ApiResponse
 ```
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 

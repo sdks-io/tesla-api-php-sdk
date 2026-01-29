@@ -11,7 +11,8 @@ declare(strict_types=1);
 namespace TeslaFleetManagementApiLib\Authentication;
 
 use Core\Utils\CoreHelper;
-use TeslaFleetManagementApiLib\Models\OauthToken;
+use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
+use TeslaFleetManagementApiLib\Models\OAuthToken;
 
 /**
  * Utility class for initializing Oauth2 security credentials.
@@ -31,81 +32,95 @@ class Oauth2CredentialsBuilder
     /**
      * Initializer for Oauth2CredentialsBuilder
      *
-     * @param string $oauthClientId
-     * @param string $oauthClientSecret
-     * @param string $oauthRedirectUri
+     * @param string $oAuthClientId
+     * @param string $oAuthClientSecret
+     * @param string $oAuthRedirectUri
      */
-    public static function init(string $oauthClientId, string $oauthClientSecret, string $oauthRedirectUri): self
+    public static function init(string $oAuthClientId, string $oAuthClientSecret, string $oAuthRedirectUri): self
     {
         return new self([
-            'oauthClientId' => $oauthClientId,
-            'oauthClientSecret' => $oauthClientSecret,
-            'oauthRedirectUri' => $oauthRedirectUri
+            'oAuthClientId' => $oAuthClientId,
+            'oAuthClientSecret' => $oAuthClientSecret,
+            'oAuthRedirectUri' => $oAuthRedirectUri
         ]);
     }
 
     /**
-     * Setter for OauthClientId.
+     * Setter for OAuthClientId.
      *
-     * @param string $oauthClientId
+     * @param string $oAuthClientId
      *
      * @return $this
      */
-    public function oauthClientId(string $oauthClientId): self
+    public function oAuthClientId(string $oAuthClientId): self
     {
-        $this->config['oauthClientId'] = $oauthClientId;
+        $this->config['oAuthClientId'] = $oAuthClientId;
         return $this;
     }
 
     /**
-     * Setter for OauthClientSecret.
+     * Setter for OAuthClientSecret.
      *
-     * @param string $oauthClientSecret
+     * @param string $oAuthClientSecret
      *
      * @return $this
      */
-    public function oauthClientSecret(string $oauthClientSecret): self
+    public function oAuthClientSecret(string $oAuthClientSecret): self
     {
-        $this->config['oauthClientSecret'] = $oauthClientSecret;
+        $this->config['oAuthClientSecret'] = $oAuthClientSecret;
         return $this;
     }
 
     /**
-     * Setter for OauthRedirectUri.
+     * Setter for OAuthRedirectUri.
      *
-     * @param string $oauthRedirectUri
+     * @param string $oAuthRedirectUri
      *
      * @return $this
      */
-    public function oauthRedirectUri(string $oauthRedirectUri): self
+    public function oAuthRedirectUri(string $oAuthRedirectUri): self
     {
-        $this->config['oauthRedirectUri'] = $oauthRedirectUri;
+        $this->config['oAuthRedirectUri'] = $oAuthRedirectUri;
         return $this;
     }
 
     /**
-     * Setter for OauthToken.
+     * Setter for OAuthToken.
      *
-     * @param OauthToken|null $oauthToken
+     * @param OAuthToken|null $oAuthToken
      *
      * @return $this
      */
-    public function oauthToken(?OauthToken $oauthToken): self
+    public function oAuthToken(?OAuthToken $oAuthToken): self
     {
-        $this->config['oauthToken'] = $oauthToken;
+        $this->config['oAuthToken'] = $oAuthToken;
+        return $this;
+    }
+
+    /**
+     * Setter for OAuthScopes.
+     *
+     * @param string[]|null $oAuthScopes
+     *
+     * @return $this
+     */
+    public function oAuthScopes(?array $oAuthScopes): self
+    {
+        OAuthScopeOauth2::checkValue($oAuthScopes);
+        $this->config['oAuthScopes'] = $oAuthScopes;
         return $this;
     }
 
     /**
      * Setter for clock skew time in seconds applied while checking the OAuth Token expiry.
      *
-     * @param int $oauthClockSkew
+     * @param int $oAuthClockSkew
      *
      * @return $this
      */
-    public function oauthClockSkew(int $oauthClockSkew): self
+    public function oAuthClockSkew(int $oAuthClockSkew): self
     {
-        $this->config['oauth2-ClockSkew'] = $oauthClockSkew;
+        $this->config['oauth2-ClockSkew'] = $oAuthClockSkew;
         return $this;
     }
 

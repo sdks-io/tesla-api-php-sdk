@@ -1,11 +1,11 @@
 
-# Oauth Provider Error
+# O Auth Provider Error
 
 OAuth 2 Authorization error codes
 
 ## Enumeration
 
-`OauthProviderError`
+`OAuthProviderError`
 
 ## Fields
 

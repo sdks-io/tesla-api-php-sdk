@@ -18,33 +18,38 @@ use TeslaFleetManagementApiLib\Models\OAuthToken;
 interface Oauth2Credentials
 {
     /**
-     * String value for oauthClientId.
+     * String value for oAuthClientId.
      */
-    public function getOauthClientId(): string;
+    public function getOAuthClientId(): string;
 
     /**
-     * String value for oauthClientSecret.
+     * String value for oAuthClientSecret.
      */
-    public function getOauthClientSecret(): string;
+    public function getOAuthClientSecret(): string;
 
     /**
-     * String value for oauthRedirectUri.
+     * String value for oAuthRedirectUri.
      */
-    public function getOauthRedirectUri(): string;
+    public function getOAuthRedirectUri(): string;
 
     /**
-     * OauthToken value for oauthToken.
+     * OAuthToken value for oAuthToken.
      */
-    public function getOauthToken(): ?OauthToken;
+    public function getOAuthToken(): ?OAuthToken;
+
+    /**
+     * OAuthScopeOauth2 value for oAuthScopes.
+     */
+    public function getOAuthScopes(): ?array;
 
     /**
      * Checks if provided credentials match with existing ones.
      *
-     * @param string $oauthClientId OAuth 2 Client ID
-     * @param string $oauthClientSecret OAuth 2 Client Secret
-     * @param string $oauthRedirectUri OAuth 2 Redirection endpoint or Callback Uri
+     * @param string $oAuthClientId OAuth 2 Client ID
+     * @param string $oAuthClientSecret OAuth 2 Client Secret
+     * @param string $oAuthRedirectUri OAuth 2 Redirection endpoint or Callback Uri
      */
-    public function equals(string $oauthClientId, string $oauthClientSecret, string $oauthRedirectUri): bool;
+    public function equals(string $oAuthClientId, string $oAuthClientSecret, string $oAuthRedirectUri): bool;
 
     /**
      * Build an authorization URL for taking the user's consent to access data.

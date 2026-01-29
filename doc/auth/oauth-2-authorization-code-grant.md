@@ -9,11 +9,12 @@ Documentation for accessing and setting credentials for oauth2.
 
 | Name | Type | Description | Setter | Getter |
 |  --- | --- | --- | --- | --- |
-| OAuthClientId | `string` | OAuth 2 Client ID | `oauthClientId` | `getOauthClientId()` |
-| OAuthClientSecret | `string` | OAuth 2 Client Secret | `oauthClientSecret` | `getOauthClientSecret()` |
-| OAuthRedirectUri | `string` | OAuth 2 Redirection endpoint or Callback Uri | `oauthRedirectUri` | `getOauthRedirectUri()` |
-| OAuthToken | `OauthToken\|null` | Object for storing information about the OAuth token | `oauthToken` | `getOauthToken()` |
-| OAuthClockSkew | `int` | Clock skew time in seconds applied while checking the OAuth Token expiry. | `oauthClockSkew` | - |
+| OAuthClientId | `string` | OAuth 2 Client ID | `oAuthClientId` | `getOAuthClientId()` |
+| OAuthClientSecret | `string` | OAuth 2 Client Secret | `oAuthClientSecret` | `getOAuthClientSecret()` |
+| OAuthRedirectUri | `string` | OAuth 2 Redirection endpoint or Callback Uri | `oAuthRedirectUri` | `getOAuthRedirectUri()` |
+| OAuthToken | `OAuthToken\|null` | Object for storing information about the OAuth token | `oAuthToken` | `getOAuthToken()` |
+| OAuthScopes | `string[]\|null` | List of scopes that apply to the OAuth token | `oAuthScopes` | `getOAuthScopes()` |
+| OAuthClockSkew | `int` | Clock skew time in seconds applied while checking the OAuth Token expiry. | `oAuthClockSkew` | - |
 
 
 
@@ -27,6 +28,7 @@ You must initialize the client with *OAuth 2.0 Authorization Code Grant* credent
 
 ```php
 use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
@@ -36,6 +38,12 @@ $client = TeslaFleetManagementApiClientBuilder::init()
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
+            ->oAuthScopes(
+                [
+                    OAuthScopeOauth2::OPENID,
+                    OAuthScopeOauth2::OFFLINE_ACCESS
+                ]
+            )
     )
     ->build();
 ```
@@ -46,7 +54,7 @@ Your application must obtain user authorization before it can execute an endpoin
 
 ### 2\. Obtain user consent
 
-To obtain user's consent, you must redirect the user to the authorization page.The `buildAuthorizationUrl()` method creates the URL to the authorization page.
+To obtain user's consent, you must redirect the user to the authorization page.The `buildAuthorizationUrl()` method creates the URL to the authorization page. You must have initialized the client with scopes for which you need permission to access.
 
 ```php
 $authUrl = $client->getOauth2Credentials()->buildAuthorizationUrl();
@@ -79,12 +87,30 @@ try {
     // re-build the client with oauth token
     $client = $client
         ->toBuilder()
-        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))
+        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
         ->build();
 } catch (TeslaFleetManagementApiLib\Exceptions\ApiException $e) {
     // handle exception
 }
 ```
+
+### Scopes
+
+Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the [`OAuthScopeOauth2`](../../doc/models/o-auth-scope-oauth-2.md) enumeration.
+
+| Scope Name | Description |
+|  --- | --- |
+| `OPENID` | Allow Tesla customers to sign in to the application with their Tesla credentials. |
+| `OFFLINE_ACCESS` | Allow getting a refresh token without needing user to log in again. |
+| `USER_DATA` | Contact information, home address, profile picture, and referral information. |
+| `VEHICLE_DEVICE_DATA` | Allow access to your vehicle’s live data, service history, service scheduling data, service communications, eligible upgrades, nearby Superchargers and ownership details. |
+| `VEHICLE_LOCATION` | Allow access to vehicle location information, including precise and coarse location data. |
+| `VEHICLE_CMDS` | Commands like add/remove driver, access Live Camera, unlock, wake up, remote start, and schedule software updates. |
+| `VEHICLE_CHARGING_CMDS` | Vehicle charging history, billed amount, charging location, and commands to schedule, start, or stop charging. |
+| `VEHICLE_SPECS` | Access detailed vehicle specifications. Partner tokens only; usable without owner authorization. |
+| `ENERGY_DEVICE_DATA` | Energy live status, site info, backup history, energy history, and charge history. |
+| `ENERGY_CMDS` | Update energy settings like backup reserve percent, operation mode, and storm mode. |
+| `ENTERPRISE_MANAGEMENT` | Allow access to enterprise management functions for businesses. |
 
 ### Refreshing the token
 
@@ -97,7 +123,7 @@ if ($client->getOauth2Credentials()->isTokenExpired()) {
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))
+            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
             ->build();
     } catch (TeslaFleetManagementApiLib\Exceptions\ApiException $e) {
         // handle exception
@@ -113,7 +139,7 @@ It is recommended that you store the access token for reuse.
 
 ```php
 // store token
-$_SESSION['access_token'] = $client->getOauth2Credentials()->getOauthToken();
+$_SESSION['access_token'] = $client->getOauth2Credentials()->getOAuthToken();
 ```
 
 ### Creating a client from a stored token
@@ -125,7 +151,7 @@ To authorize a client using a stored access token, just set the access token in 
 $token = $_SESSION['access_token'];
 
 // re-build the client with oauth token
-$client = $client->toBuilder()->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))->build();
+$client = $client->toBuilder()->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))->build();
 ```
 
 ### Complete example
@@ -144,6 +170,7 @@ use TeslaFleetManagementApiLib\Logging\ResponseLoggingConfigurationBuilder;
 use Psr\Log\LogLevel;
 use TeslaFleetManagementApiLib\Environment;
 use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
@@ -153,6 +180,12 @@ $client = TeslaFleetManagementApiClientBuilder::init()
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
+            ->oAuthScopes(
+                [
+                    OAuthScopeOauth2::OPENID,
+                    OAuthScopeOauth2::OFFLINE_ACCESS
+                ]
+            )
     )
     ->environment(Environment::PRODUCTION)
     ->loggingConfiguration(
@@ -170,7 +203,7 @@ if (isset($_SESSION['access_token'])) {
     // re-build the client with oauth token
     $client = $client
         ->toBuilder()
-        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))
+        ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
         ->build();
 } else {
     try {
@@ -184,7 +217,7 @@ if (isset($_SESSION['access_token'])) {
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))
+            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
             ->build();
 
         // store token
@@ -202,7 +235,7 @@ if ($client->getOauth2Credentials()->isTokenExpired()) {
         // re-build the client with oauth token
         $client = $client
             ->toBuilder()
-            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oauthToken($token))
+            ->oauth2Credentials($client->getOauth2CredentialsBuilder()->oAuthToken($token))
             ->build();
 
         // update the cached token

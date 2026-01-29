@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace TeslaFleetManagementApiLib\Controllers;
 
+use Core\Authentication\Auth;
 use Core\Request\Parameters\BodyParam;
 use Core\Request\Parameters\HeaderParam;
 use Core\Request\Parameters\QueryParam;
@@ -31,7 +32,7 @@ class PartnerController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::GET,
             '/api/1/partner_accounts/fleet_telemetry_error_vins'
-        )->auth('bearerAuth');
+        )->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(BackupResponse::class)->returnApiResponse();
 
@@ -44,7 +45,7 @@ class PartnerController extends BaseController
     public function getRecentFleetTelemetryErrors(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/partner_accounts/fleet_telemetry_errors')
-            ->auth('bearerAuth');
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(FleetTelemetryErrorsResponse::class)->returnApiResponse();
 
@@ -59,7 +60,7 @@ class PartnerController extends BaseController
     public function getPublicKeyForADomain(string $domain): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/partner_accounts/public_key')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(QueryParam::init('domain', $domain)->required());
 
         $_resHandler = $this->responseHandler()->type(PublicKeyResponse::class)->returnApiResponse();
@@ -75,7 +76,7 @@ class PartnerController extends BaseController
     public function registerAPartnerAccount(RegisterPartnerRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/partner_accounts')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(HeaderParam::init('Content-Type', 'application/json'), BodyParam::init($body)->required());
 
         $_resHandler = $this->responseHandler()->type(RegisterPartnerResponse::class)->returnApiResponse();

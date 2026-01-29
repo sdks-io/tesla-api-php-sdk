@@ -29,7 +29,7 @@ $vehiclesController = $client->getVehiclesController();
 * [Create or Update Fleet Telemetry Configuration](../../doc/controllers/vehicles.md#create-or-update-fleet-telemetry-configuration)
 * [Get Fleet Telemetry Configuration](../../doc/controllers/vehicles.md#get-fleet-telemetry-configuration)
 * [Delete Fleet Telemetry Configuration](../../doc/controllers/vehicles.md#delete-fleet-telemetry-configuration)
-* [Configure Fleet Telemetry Using Signed JWS Token](../../doc/controllers/vehicles.md#configure-fleet-telemetry-using-signed-jws-token)
+* [Configure Fleet Telemetry Using Signed Jws Token](../../doc/controllers/vehicles.md#configure-fleet-telemetry-using-signed-jws-token)
 * [Get Fleet Telemetry Errors for a Vehicle](../../doc/controllers/vehicles.md#get-fleet-telemetry-errors-for-a-vehicle)
 
 
@@ -38,6 +38,12 @@ $vehiclesController = $client->getVehiclesController();
 ```php
 function listVehicles(): ApiResponse
 ```
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -61,6 +67,12 @@ function getVehicle(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -87,6 +99,12 @@ function mobileEnabled(string $vehicleTag): ApiResponse
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`Api1VehiclesMobileEnabledResponse`](../../doc/models/api-1-vehicles-mobile-enabled-response.md).
@@ -111,6 +129,12 @@ function nearbyChargingSites(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -137,6 +161,12 @@ function vehicleLiveData(string $vehicleTag): ApiResponse
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`SiteInfoResponse`](../../doc/models/site-info-response.md).
@@ -161,6 +191,12 @@ function wakeUpVehicle(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -187,6 +223,12 @@ function vehicleSpecs(string $vin): ApiResponse
 |  --- | --- | --- | --- |
 | `vin` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`SiteInfoResponse`](../../doc/models/site-info-response.md).
@@ -212,6 +254,12 @@ function vehicleOptions(string $vin): ApiResponse
 |  --- | --- | --- | --- |
 | `vin` | `string` | Query, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`Api1DxVehiclesOptionsResponse`](../../doc/models/api-1-dx-vehicles-options-response.md).
@@ -230,6 +278,12 @@ $apiResponse = $vehiclesController->vehicleOptions($vin);
 ```php
 function warrantyDetails(): ApiResponse
 ```
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -253,6 +307,12 @@ function getAllowedDriversForAVehicle(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -279,6 +339,12 @@ function removeDriverAccessFromAVehicle(string $vehicleTag): ApiResponse
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`SimpleOkResponse`](../../doc/models/simple-ok-response.md).
@@ -303,6 +369,12 @@ function getEligibleVehicleSubscriptions(string $vin): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vin` | `string` | Query, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -329,6 +401,12 @@ function getEligibleVehicleUpgrades(string $vin): ApiResponse
 |  --- | --- | --- | --- |
 | `vin` | `string` | Query, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type [`SiteInfoResponse`](../../doc/models/site-info-response.md).
@@ -354,6 +432,12 @@ function setEnterprisePayerRoles(string $vin, EnterprisePayerRequest $body): Api
 |  --- | --- | --- | --- |
 | `vin` | `string` | Template, Required | - |
 | `body` | [`EnterprisePayerRequest`](../../doc/models/enterprise-payer-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -387,6 +471,12 @@ function getEnterpriseRolesForAVehicle(string $vin): ApiResponse
 |  --- | --- | --- | --- |
 | `vin` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type `array`.
@@ -411,6 +501,12 @@ function getFleetStatusForVehicles(FleetStatusRequest $body): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`FleetStatusRequest`](../../doc/models/fleet-status-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -437,6 +533,12 @@ function createOrUpdateFleetTelemetryConfiguration(array $body): ApiResponse
 |  --- | --- | --- | --- |
 | `body` | `array` | Body, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type `array`.
@@ -461,6 +563,12 @@ function getFleetTelemetryConfiguration(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -487,6 +595,12 @@ function deleteFleetTelemetryConfiguration(string $vehicleTag): ApiResponse
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
 
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
+
 ## Response Type
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `getResult()` method on this instance returns the response data which is of type `array`.
@@ -500,7 +614,7 @@ $apiResponse = $vehiclesController->deleteFleetTelemetryConfiguration($vehicleTa
 ```
 
 
-# Configure Fleet Telemetry Using Signed JWS Token
+# Configure Fleet Telemetry Using Signed Jws Token
 
 ```php
 function configureFleetTelemetryUsingSignedJwsToken(FleetTelemetryJwsRequest $body): ApiResponse
@@ -511,6 +625,12 @@ function configureFleetTelemetryUsingSignedJwsToken(FleetTelemetryJwsRequest $bo
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`FleetTelemetryJwsRequest`](../../doc/models/fleet-telemetry-jws-request.md) | Body, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 
@@ -536,6 +656,12 @@ function getFleetTelemetryErrorsForAVehicle(string $vehicleTag): ApiResponse
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `vehicleTag` | `string` | Template, Required | - |
+
+## Requires scope
+
+### oauth2
+
+`energy_cmds`, `energy_device_data`, `enterprise_management`, `offline_access`, `openid`, `user_data`, `vehicle_charging_cmds`, `vehicle_cmds`, `vehicle_device_data`, `vehicle_location`, `vehicle_specs`
 
 ## Response Type
 

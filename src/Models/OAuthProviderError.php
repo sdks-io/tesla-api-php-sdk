@@ -17,7 +17,7 @@ use stdClass;
 /**
  * OAuth 2 Authorization error codes
  */
-class OauthProviderError
+class OAuthProviderError
 {
     /**
      * The request is missing a required parameter, includes an unsupported parameter value (other than
@@ -79,6 +79,6 @@ class OauthProviderError
         if (CoreHelper::checkValueOrValuesInList($value, self::_ALL_VALUES)) {
             return $value;
         }
-        throw new Exception("$value is invalid for OauthProviderError.");
+        throw new Exception("$value is invalid for OAuthProviderError.");
     }
 }

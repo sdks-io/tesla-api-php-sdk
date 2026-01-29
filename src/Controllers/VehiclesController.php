@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace TeslaFleetManagementApiLib\Controllers;
 
+use Core\Authentication\Auth;
 use Core\Request\Parameters\BodyParam;
 use Core\Request\Parameters\HeaderParam;
 use Core\Request\Parameters\QueryParam;
@@ -37,7 +38,8 @@ class VehiclesController extends BaseController
      */
     public function listVehicles(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(Api1VehiclesResponse::class)->returnApiResponse();
 
@@ -52,7 +54,7 @@ class VehiclesController extends BaseController
     public function getVehicle(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles/{vehicle_tag}')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(Api1VehiclesResponseGetVehicle::class)->returnApiResponse();
@@ -68,7 +70,7 @@ class VehiclesController extends BaseController
     public function mobileEnabled(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles/{vehicle_tag}/mobile_enabled')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(Api1VehiclesMobileEnabledResponse::class)->returnApiResponse();
@@ -86,7 +88,9 @@ class VehiclesController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::GET,
             '/api/1/vehicles/{vehicle_tag}/nearby_charging_sites'
-        )->auth('bearerAuth')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
+            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()
             ->type(Api1VehiclesNearbyChargingSitesResponse::class)
@@ -103,7 +107,7 @@ class VehiclesController extends BaseController
     public function vehicleLiveData(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles/{vehicle_tag}/vehicle_data')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(SiteInfoResponse::class)->returnApiResponse();
@@ -119,7 +123,7 @@ class VehiclesController extends BaseController
     public function wakeUpVehicle(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/vehicles/{vehicle_tag}/wake_up')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(Api1VehiclesWakeUpResponse::class)->returnApiResponse();
@@ -135,7 +139,7 @@ class VehiclesController extends BaseController
     public function vehicleSpecs(string $vin): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles/{vin}/specs')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vin', $vin)->required());
 
         $_resHandler = $this->responseHandler()->type(SiteInfoResponse::class)->returnApiResponse();
@@ -151,7 +155,7 @@ class VehiclesController extends BaseController
     public function vehicleOptions(string $vin): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/vehicles/options')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(QueryParam::init('vin', $vin)->required());
 
         $_resHandler = $this->responseHandler()->type(Api1DxVehiclesOptionsResponse::class)->returnApiResponse();
@@ -164,7 +168,8 @@ class VehiclesController extends BaseController
      */
     public function warrantyDetails(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/warranty/details')->auth('bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/warranty/details')
+            ->auth(Auth::and('bearerAuth', 'oauth2'));
 
         $_resHandler = $this->responseHandler()->type(Api1DxWarrantyDetailsResponse::class)->returnApiResponse();
 
@@ -179,7 +184,7 @@ class VehiclesController extends BaseController
     public function getAllowedDriversForAVehicle(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/vehicles/{vehicle_tag}/drivers')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(DriversResponse::class)->returnApiResponse();
@@ -195,7 +200,7 @@ class VehiclesController extends BaseController
     public function removeDriverAccessFromAVehicle(string $vehicleTag): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::DELETE, '/api/1/vehicles/{vehicle_tag}/drivers')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(SimpleOkResponse::class)->returnApiResponse();
@@ -211,7 +216,7 @@ class VehiclesController extends BaseController
     public function getEligibleVehicleSubscriptions(string $vin): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/vehicles/subscriptions/eligibility')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(QueryParam::init('vin', $vin)->required());
 
         $_resHandler = $this->responseHandler()->type(SiteInfoResponse::class)->returnApiResponse();
@@ -227,7 +232,7 @@ class VehiclesController extends BaseController
     public function getEligibleVehicleUpgrades(string $vin): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/vehicles/upgrades/eligibility')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(QueryParam::init('vin', $vin)->required());
 
         $_resHandler = $this->responseHandler()->type(SiteInfoResponse::class)->returnApiResponse();
@@ -244,7 +249,7 @@ class VehiclesController extends BaseController
     public function setEnterprisePayerRoles(string $vin, EnterprisePayerRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/dx/enterprise/v1/{vin}/payer')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(
                 TemplateParam::init('vin', $vin)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -264,7 +269,7 @@ class VehiclesController extends BaseController
     public function getEnterpriseRolesForAVehicle(string $vin): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/enterprise/v1/{vin}/roles')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(TemplateParam::init('vin', $vin)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -280,7 +285,7 @@ class VehiclesController extends BaseController
     public function getFleetStatusForVehicles(FleetStatusRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/vehicles/fleet_status')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(HeaderParam::init('Content-Type', 'application/json'), BodyParam::init($body)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -296,7 +301,7 @@ class VehiclesController extends BaseController
     public function createOrUpdateFleetTelemetryConfiguration(array $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/vehicles/fleet_telemetry_config')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(HeaderParam::init('Content-Type', 'application/json'), BodyParam::init($body)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -314,7 +319,9 @@ class VehiclesController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::GET,
             '/api/1/vehicles/{vehicle_tag}/fleet_telemetry_config'
-        )->auth('bearerAuth')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
+            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
 
@@ -331,7 +338,9 @@ class VehiclesController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::DELETE,
             '/api/1/vehicles/{vehicle_tag}/fleet_telemetry_config'
-        )->auth('bearerAuth')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
+            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
 
@@ -346,7 +355,7 @@ class VehiclesController extends BaseController
     public function configureFleetTelemetryUsingSignedJwsToken(FleetTelemetryJwsRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/vehicles/fleet_telemetry_config_jws')
-            ->auth('bearerAuth')
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
             ->parameters(HeaderParam::init('Content-Type', 'application/json'), BodyParam::init($body)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -364,7 +373,9 @@ class VehiclesController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::GET,
             '/api/1/vehicles/{vehicle_tag}/fleet_telemetry_errors'
-        )->auth('bearerAuth')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )
+            ->auth(Auth::and('bearerAuth', 'oauth2'))
+            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
 

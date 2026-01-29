@@ -20,8 +20,8 @@ use Core\Request\RequestBuilder;
 use Core\Utils\CoreHelper;
 use InvalidArgumentException;
 use TeslaFleetManagementApiLib\Server;
-use TeslaFleetManagementApiLib\Models\OauthToken;
-use TeslaFleetManagementApiLib\Controllers\OauthAuthorizationController;
+use TeslaFleetManagementApiLib\Models\OAuthToken;
+use TeslaFleetManagementApiLib\Controllers\OAuthAuthorizationController;
 use TeslaFleetManagementApiLib\ConfigurationDefaults;
 
 /**
@@ -33,7 +33,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
 
     /**
      * Singleton instance of OAuth 2 API controller
-     * @var OauthAuthorizationController
+     * @var OAuthAuthorizationController
      */
     private $oAuthApi;
 
@@ -61,53 +61,65 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
     }
 
     /**
-     * String value for oauthClientId.
+     * String value for oAuthClientId.
      */
-    public function getOauthClientId(): string
+    public function getOAuthClientId(): string
     {
-        return $this->config['oauthClientId'] ?? ConfigurationDefaults::O_AUTH_CLIENT_ID;
+        return $this->config['oAuthClientId'] ?? ConfigurationDefaults::O_AUTH_CLIENT_ID;
     }
 
     /**
-     * String value for oauthClientSecret.
+     * String value for oAuthClientSecret.
      */
-    public function getOauthClientSecret(): string
+    public function getOAuthClientSecret(): string
     {
-        return $this->config['oauthClientSecret'] ?? ConfigurationDefaults::O_AUTH_CLIENT_SECRET;
+        return $this->config['oAuthClientSecret'] ?? ConfigurationDefaults::O_AUTH_CLIENT_SECRET;
     }
 
     /**
-     * String value for oauthRedirectUri.
+     * String value for oAuthRedirectUri.
      */
-    public function getOauthRedirectUri(): string
+    public function getOAuthRedirectUri(): string
     {
-        return $this->config['oauthRedirectUri'] ?? ConfigurationDefaults::O_AUTH_REDIRECT_URI;
+        return $this->config['oAuthRedirectUri'] ?? ConfigurationDefaults::O_AUTH_REDIRECT_URI;
     }
 
     /**
-     * OauthToken value for oauthToken.
+     * OAuthToken value for oAuthToken.
      */
-    public function getOauthToken(): ?OauthToken
+    public function getOAuthToken(): ?OAuthToken
     {
-        $oauthToken = $this->config['oauthToken'];
-        if ($oauthToken instanceof OauthToken) {
-            return clone $oauthToken;
+        $oAuthToken = $this->config['oAuthToken'];
+        if ($oAuthToken instanceof OAuthToken) {
+            return clone $oAuthToken;
         }
         return ConfigurationDefaults::O_AUTH_TOKEN;
     }
 
     /**
+     * OAuthScopeOauth2 value for oAuthScopes.
+     */
+    public function getOAuthScopes(): ?array
+    {
+        $oAuthScopes = $this->config['oAuthScopes'];
+        if (is_array($oAuthScopes)) {
+            return $oAuthScopes;
+        }
+        return ConfigurationDefaults::O_AUTH_SCOPES;
+    }
+
+    /**
      * Checks if provided credentials match with existing ones.
      *
-     * @param string $oauthClientId OAuth 2 Client ID
-     * @param string $oauthClientSecret OAuth 2 Client Secret
-     * @param string $oauthRedirectUri OAuth 2 Redirection endpoint or Callback Uri
+     * @param string $oAuthClientId OAuth 2 Client ID
+     * @param string $oAuthClientSecret OAuth 2 Client Secret
+     * @param string $oAuthRedirectUri OAuth 2 Redirection endpoint or Callback Uri
      */
-    public function equals(string $oauthClientId, string $oauthClientSecret, string $oauthRedirectUri): bool
+    public function equals(string $oAuthClientId, string $oAuthClientSecret, string $oAuthRedirectUri): bool
     {
-        return $oauthClientId == $this->getOauthClientId() &&
-            $oauthClientSecret == $this->getOauthClientSecret() &&
-            $oauthRedirectUri == $this->getOauthRedirectUri();
+        return $oAuthClientId == $this->getOAuthClientId() &&
+            $oAuthClientSecret == $this->getOAuthClientSecret() &&
+            $oAuthRedirectUri == $this->getOAuthRedirectUri();
     }
 
     /**
@@ -125,14 +137,15 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
      */
     public function buildAuthorizationUrl(?string $state = null, ?array $additionalParams = null): string
     {
-        return (new RequestBuilder(RequestMethod::GET, ""))
+        return (new RequestBuilder(RequestMethod::GET, '/authorize'))
             ->server(Server::AUTH_SERVER)
             ->parameters(
                 AdditionalQueryParams::init($additionalParams),
                 AdditionalQueryParams::init([
                     'response_type' => 'code',
-                    'client_id'     => $this->getOauthClientId(),
-                    'redirect_uri'  => $this->getOauthRedirectUri(),
+                    'client_id'     => $this->getOAuthClientId(),
+                    'redirect_uri'  => $this->getOAuthRedirectUri(),
+                    'scope'         => implode(' ', $this->getOAuthScopes() ?? []),
                     'state'         => $state
                 ])
             )
@@ -145,13 +158,13 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
      * @param  string     $authorizationCode Authorization code returned by the OAuth provider.
      * @param  array|null $additionalParams  Additional parameters to send during authorization
      */
-    public function fetchToken(string $authorizationCode, ?array $additionalParams = null): OauthToken
+    public function fetchToken(string $authorizationCode, ?array $additionalParams = null): OAuthToken
     {
         //send request for access token
         $response = $this->oAuthApi->requestTokenOauth2(
             $this->buildBasicHeader(),
             $authorizationCode,
-            $this->getOauthRedirectUri() ?? "",
+            $this->getOAuthRedirectUri() ?? "",
             $additionalParams
         );
 
@@ -169,13 +182,13 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
      * Refresh the OAuth token.
      * @param  array|null        $additionalParams Additional parameters to send during token refresh
      */
-    public function refreshToken(?array $additionalParams = null): OauthToken
+    public function refreshToken(?array $additionalParams = null): OAuthToken
     {
         //send request for token refresh
         $response = $this->oAuthApi->refreshTokenOauth2(
             $this->buildBasicHeader(),
-            $this->getOauthToken()->getRefreshToken() ?? "",
-            null,
+            $this->getOAuthToken()->getRefreshToken() ?? "",
+            implode(' ', $this->getOAuthScopes() ?? []),
             $additionalParams
         );
 
@@ -230,7 +243,7 @@ class Oauth2Manager extends CoreAuth implements Oauth2Credentials
     private function buildBasicHeader(): string
     {
         return 'Basic ' . base64_encode(
-            $this->getOauthClientId() . ':' . $this->getOauthClientSecret()
+            $this->getOAuthClientId() . ':' . $this->getOAuthClientSecret()
         );
     }
 

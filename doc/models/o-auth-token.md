@@ -1,11 +1,11 @@
 
-# Oauth Token
+# O Auth Token
 
 OAuth 2 Authorization endpoint response
 
 ## Structure
 
-`OauthToken`
+`OAuthToken`
 
 ## Fields
 

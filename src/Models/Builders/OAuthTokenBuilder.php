@@ -11,34 +11,34 @@ declare(strict_types=1);
 namespace TeslaFleetManagementApiLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
-use TeslaFleetManagementApiLib\Models\OauthToken;
+use TeslaFleetManagementApiLib\Models\OAuthToken;
 
 /**
- * Builder for model OauthToken
+ * Builder for model OAuthToken
  *
- * @see OauthToken
+ * @see OAuthToken
  */
-class OauthTokenBuilder
+class OAuthTokenBuilder
 {
     /**
-     * @var OauthToken
+     * @var OAuthToken
      */
     private $instance;
 
-    private function __construct(OauthToken $instance)
+    private function __construct(OAuthToken $instance)
     {
         $this->instance = $instance;
     }
 
     /**
-     * Initializes a new Oauth Token Builder object.
+     * Initializes a new O Auth Token Builder object.
      *
      * @param string $accessToken
      * @param string $tokenType
      */
     public static function init(string $accessToken, string $tokenType): self
     {
-        return new self(new OauthToken($accessToken, $tokenType));
+        return new self(new OAuthToken($accessToken, $tokenType));
     }
 
     /**
@@ -86,9 +86,9 @@ class OauthTokenBuilder
     }
 
     /**
-     * Initializes a new Oauth Token object.
+     * Initializes a new O Auth Token object.
      */
-    public function build(): OauthToken
+    public function build(): OAuthToken
     {
         return CoreHelper::clone($this->instance);
     }

@@ -30,6 +30,7 @@ use Psr\Log\LogLevel;
 use TeslaFleetManagementApiLib\Environment;
 use TeslaFleetManagementApiLib\Authentication\BearerAuthCredentialsBuilder;
 use TeslaFleetManagementApiLib\Authentication\Oauth2CredentialsBuilder;
+use TeslaFleetManagementApiLib\Models\OAuthScopeOauth2;
 use TeslaFleetManagementApiLib\TeslaFleetManagementApiClientBuilder;
 
 $client = TeslaFleetManagementApiClientBuilder::init()
@@ -44,6 +45,12 @@ $client = TeslaFleetManagementApiClientBuilder::init()
             'OAuthClientSecret',
             'OAuthRedirectUri'
         )
+            ->oAuthScopes(
+                [
+                    OAuthScopeOauth2::OPENID,
+                    OAuthScopeOauth2::OFFLINE_ACCESS
+                ]
+            )
     )
     ->environment(Environment::PRODUCTION)
     ->loggingConfiguration(
@@ -68,5 +75,6 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | getPartnerController() | Gets PartnerController |
 | getUserController() | Gets UserController |
 | getVehiclesController() | Gets VehiclesController |
-| getOauthAuthorizationController() | Gets OauthAuthorizationController |
+| getVehicleCommandsController() | Gets VehicleCommandsController |
+| getOAuthAuthorizationController() | Gets OAuthAuthorizationController |
 
