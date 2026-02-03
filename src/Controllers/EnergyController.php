@@ -41,7 +41,7 @@ class EnergyController extends BaseController
     public function adjustSiteSBackupReserve(string $energySiteId, BackupRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/energy_sites/{energy_site_id}/backup')
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -75,7 +75,7 @@ class EnergyController extends BaseController
             RequestMethod::GET,
             '/api/1/energy_sites/{energy_site_id}/calendar_history'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 QueryParam::init('kind', $kind)->required(),
@@ -114,7 +114,7 @@ class EnergyController extends BaseController
             RequestMethod::GET,
             '/api/1/energy_sites/{energy_site_id}/telemetry_history'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 QueryParam::init('kind', $kind)->required(),
@@ -142,9 +142,7 @@ class EnergyController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::GET,
             '/api/1/energy_sites/{energy_site_id}/live_status'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('energy_site_id', $energySiteId)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('energy_site_id', $energySiteId)->required());
 
         $_resHandler = $this->responseHandler()->type(LiveStatusResponse::class)->returnApiResponse();
 
@@ -160,7 +158,7 @@ class EnergyController extends BaseController
     public function setSiteModeAutonomousOrSelfConsumption(string $energySiteId, OperationRequest $body): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/api/1/energy_sites/{energy_site_id}/operation')
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -186,7 +184,7 @@ class EnergyController extends BaseController
             RequestMethod::POST,
             '/api/1/energy_sites/{energy_site_id}/grid_import_export'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -212,7 +210,7 @@ class EnergyController extends BaseController
             RequestMethod::POST,
             '/api/1/energy_sites/{energy_site_id}/off_grid_vehicle_charging_reserve'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -236,7 +234,7 @@ class EnergyController extends BaseController
             RequestMethod::POST,
             '/api/1/energy_sites/{energy_site_id}/storm_mode'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -260,7 +258,7 @@ class EnergyController extends BaseController
             RequestMethod::POST,
             '/api/1/energy_sites/{energy_site_id}/time_of_use_settings'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('energy_site_id', $energySiteId)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -277,8 +275,7 @@ class EnergyController extends BaseController
      */
     public function getUserProductsVehiclesEnergySites(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/products')
-            ->auth('thirdpartytoken', 'bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/products')->auth('thirdpartytoken');
 
         $_resHandler = $this->responseHandler()->type(ProductsResponse::class)->returnApiResponse();
 
@@ -293,7 +290,7 @@ class EnergyController extends BaseController
     public function getSiteInformationAssetsSettingsFeatures(string $energySiteId): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/energy_sites/{energy_site_id}/site_info')
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(TemplateParam::init('energy_site_id', $energySiteId)->required());
 
         $_resHandler = $this->responseHandler()->type(SiteInfoResponse::class)->returnApiResponse();

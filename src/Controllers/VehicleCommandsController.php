@@ -38,7 +38,7 @@ class VehicleCommandsController extends BaseController
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/actuate_trunk'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('vehicle_tag', $vehicleTag)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -62,7 +62,7 @@ class VehicleCommandsController extends BaseController
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/add_charge_schedule'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('vehicle_tag', $vehicleTag)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -86,7 +86,7 @@ class VehicleCommandsController extends BaseController
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/add_precondition_schedule'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('vehicle_tag', $vehicleTag)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -110,7 +110,7 @@ class VehicleCommandsController extends BaseController
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/adjust_volume'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('vehicle_tag', $vehicleTag)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -132,9 +132,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/auto_conditioning_start'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -151,9 +149,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/auto_conditioning_stop'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -170,9 +166,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/cancel_software_update'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -189,9 +183,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_max_range'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -208,9 +200,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_port_door_open'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -227,9 +217,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_port_door_close'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -246,9 +234,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_standard'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -265,9 +251,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_start'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -284,9 +268,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/charge_stop'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -305,9 +287,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/clear_pin_to_drive_admin'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -324,9 +304,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/door_lock'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -343,9 +321,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/door_unlock'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -364,9 +340,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/erase_user_data'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -385,9 +359,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/flash_lights'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -406,7 +378,7 @@ class VehicleCommandsController extends BaseController
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/guest_mode'
         )
-            ->auth('thirdpartytoken', 'bearerAuth')
+            ->auth('thirdpartytoken')
             ->parameters(
                 TemplateParam::init('vehicle_tag', $vehicleTag)->required(),
                 HeaderParam::init('Content-Type', 'application/json'),
@@ -428,9 +400,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/honk_horn'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 
@@ -447,9 +417,7 @@ class VehicleCommandsController extends BaseController
         $_reqBuilder = $this->requestBuilder(
             RequestMethod::POST,
             '/api/1/vehicles/{vehicle_tag}/command/media_next_fav'
-        )
-            ->auth('thirdpartytoken', 'bearerAuth')
-            ->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
+        )->auth('thirdpartytoken')->parameters(TemplateParam::init('vehicle_tag', $vehicleTag)->required());
 
         $_resHandler = $this->responseHandler()->type(CommandResponse::class)->returnApiResponse();
 

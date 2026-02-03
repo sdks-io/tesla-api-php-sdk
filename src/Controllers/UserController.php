@@ -25,7 +25,7 @@ class UserController extends BaseController
     public function getCustomFeatureFlagsForAUser(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/feature_config')
-            ->auth('thirdpartytoken', 'bearerAuth');
+            ->auth('thirdpartytoken');
 
         $_resHandler = $this->responseHandler()->type(BackupResponse::class)->returnApiResponse();
 
@@ -37,8 +37,7 @@ class UserController extends BaseController
      */
     public function getSummaryOfAUserSAccount(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/me')
-            ->auth('thirdpartytoken', 'bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/me')->auth('thirdpartytoken');
 
         $_resHandler = $this->responseHandler()->type(MeResponse::class)->returnApiResponse();
 
@@ -50,8 +49,7 @@ class UserController extends BaseController
      */
     public function getActiveOrdersForAUser(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/orders')
-            ->auth('thirdpartytoken', 'bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/orders')->auth('thirdpartytoken');
 
         $_resHandler = $this->responseHandler()->type(OrdersResponse::class)->returnApiResponse();
 
@@ -63,8 +61,7 @@ class UserController extends BaseController
      */
     public function getUserSRegionAndFleetApiBaseUrl(): ApiResponse
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/region')
-            ->auth('thirdpartytoken', 'bearerAuth');
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/users/region')->auth('thirdpartytoken');
 
         $_resHandler = $this->responseHandler()->type(RegionResponse::class)->returnApiResponse();
 
