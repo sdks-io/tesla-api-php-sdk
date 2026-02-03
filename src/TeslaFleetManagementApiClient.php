@@ -85,7 +85,7 @@ class TeslaFleetManagementApiClient implements ConfigurationInterface
             ->converter(new CompatibilityConverter())
             ->jsonHelper(ApiHelper::getJsonHelper())
             ->apiCallback($this->config['httpCallback'] ?? null)
-            ->userAgent('PHP SDK, Version: 1.0.3, on OS {os-info}')
+            ->userAgent('PHP SDK, Version: 1.0.4, on OS {os-info}')
             ->serverUrls(self::ENVIRONMENT_MAP[$this->getEnvironment()], Server::DEFAULT_)
             ->authManagers(
                 ['bearerAuth' => $this->bearerAuthManager, 'thirdpartytoken' => $this->thirdpartytokenManager]

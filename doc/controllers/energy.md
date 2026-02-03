@@ -57,10 +57,24 @@ $body = BackupRequestBuilder::init(
     76
 )->build();
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->adjustSiteSBackupReserve(
     $energySiteId,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'BackupResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -109,12 +123,26 @@ $startDate = DateTimeHelper::fromRfc3339DateTimeRequired('2016-03-13T12:52:32.12
 
 $endDate = DateTimeHelper::fromRfc3339DateTimeRequired('2016-03-13T12:52:32.123Z');
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->getBackupOrEnergyHistory(
     $energySiteId,
     $kind,
     $startDate,
     $endDate
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CalendarHistoryResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -161,12 +189,26 @@ $startDate = DateTimeHelper::fromRfc3339DateTimeRequired('2016-03-13T12:52:32.12
 
 $endDate = DateTimeHelper::fromRfc3339DateTimeRequired('2016-03-13T12:52:32.123Z');
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->getWallConnectorChargingHistory(
     $energySiteId,
     $kind,
     $startDate,
     $endDate
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'ChargeHistoryResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -197,7 +239,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $energySiteId = 'energy_site_id2';
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->getLiveSiteStatus($energySiteId);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'LiveStatusResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -233,10 +289,24 @@ $body = OperationRequestBuilder::init(
     DefaultRealMode::AUTONOMOUS
 )->build();
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->setSiteModeAutonomousOrSelfConsumption(
     $energySiteId,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'GenericUpdateResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -271,7 +341,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $energySiteId = 'energy_site_id2';
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->allowDisallowChargingFromTheGridAndExportingEnergyToTheGrid($energySiteId);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'GenericUpdateResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -310,10 +394,24 @@ $body = OffGridVehicleChargingReserveRequestBuilder::init(
     52
 )->build();
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->adjustSiteSOffGridVehicleChargingReserve(
     $energySiteId,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'GenericUpdateResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -349,10 +447,24 @@ $body = StormModeRequestBuilder::init(
     false
 )->build();
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->updateStormWatchParticipation(
     $energySiteId,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'GenericUpdateResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -388,10 +500,24 @@ $body = TimeOfUseSettingsRequestBuilder::init(
     TouSettingsBuilder::init()->build()
 )->build();
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->updateTimeOfUseTouSettings(
     $energySiteId,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'GenericUpdateResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -414,7 +540,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```php
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->getUserProductsVehiclesEnergySites();
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'ProductsResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -445,6 +585,20 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $energySiteId = 'energy_site_id2';
 
+$energyController = $client->getEnergyController();
 $apiResponse = $energyController->getSiteInformationAssetsSettingsFeatures($energySiteId);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'SiteInfoResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 

@@ -37,7 +37,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```php
+$partnerController = $client->getPartnerController();
 $apiResponse = $partnerController->getVinsWithFleetTelemetryErrors();
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'BackupResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -60,7 +74,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```php
+$partnerController = $client->getPartnerController();
 $apiResponse = $partnerController->getRecentFleetTelemetryErrors();
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'FleetTelemetryErrorsResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -91,7 +119,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $domain = 'domain6';
 
+$partnerController = $client->getPartnerController();
 $apiResponse = $partnerController->getPublicKeyForADomain($domain);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'PublicKeyResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -124,6 +166,20 @@ $body = RegisterPartnerRequestBuilder::init(
     'domain.com'
 )->build();
 
+$partnerController = $client->getPartnerController();
 $apiResponse = $partnerController->registerAPartnerAccount($body);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'RegisterPartnerResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 

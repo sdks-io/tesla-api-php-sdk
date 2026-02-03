@@ -38,7 +38,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```php
+$chargingController = $client->getChargingController();
 $apiResponse = $chargingController->getChargingHistory();
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'ChargingHistoryResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -71,7 +85,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $id = 'id0';
 
+$chargingController = $client->getChargingController();
 $apiResponse = $chargingController->getChargingInvoice($id);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'mixed:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -96,6 +124,20 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```php
+$chargingController = $client->getChargingController();
 $apiResponse = $chargingController->getChargingSessions();
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'ChargingSessionsResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 

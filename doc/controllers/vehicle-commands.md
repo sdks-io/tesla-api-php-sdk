@@ -67,10 +67,24 @@ $body = ActuateTrunkRequestBuilder::init(
     WhichTrunk::FRONT
 )->build();
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->actuateTrunk(
     $vehicleTag,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -109,10 +123,24 @@ $body = AddChargeScheduleRequestBuilder::init(
     false
 )->build();
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->addChargeSchedule(
     $vehicleTag,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -151,10 +179,24 @@ $body = AddPreconditionScheduleRequestBuilder::init(
     false
 )->build();
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->addPreconditionSchedule(
     $vehicleTag,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -190,10 +232,24 @@ $body = AdjustVolumeRequestBuilder::init(
     74
 )->build();
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->adjustMediaVolume(
     $vehicleTag,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -224,7 +280,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->startClimatePreconditioning($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -255,7 +325,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->stopClimatePreconditioning($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -286,7 +370,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->cancelSoftwareUpdate($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -317,7 +415,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->chargeMaxRange($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -348,7 +460,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->openChargePortDoor($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -379,7 +505,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->closeChargePortDoor($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -410,7 +550,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->chargeStandard($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -441,7 +595,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->startCharging($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -472,7 +640,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->stopCharging($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -505,7 +687,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->clearPinToDriveAdmin($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -536,7 +732,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->lockDoors($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -567,7 +777,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->unlockDoors($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -600,7 +824,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->eraseUserData($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -633,7 +871,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->flashLights($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -669,10 +921,24 @@ $body = GuestModeRequestBuilder::init(
     false
 )->build();
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->enableOrDisableGuestMode(
     $vehicleTag,
     $body
 );
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -703,7 +969,21 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->honkHorn($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 
 
@@ -734,6 +1014,20 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```php
 $vehicleTag = 'vehicle_tag6';
 
+$vehicleCommandsController = $client->getVehicleCommandsController();
 $apiResponse = $vehicleCommandsController->nextFavoriteMediaTrack($vehicleTag);
+
+// Extracting response status code
+var_dump($apiResponse->getStatusCode());
+// Extracting response headers
+var_dump($apiResponse->getHeaders());
+
+if ($apiResponse->isSuccess()) {
+    echo 'CommandResponse:';
+    var_dump($apiResponse->getResult());
+} else {
+    $error = $apiResponse->getResult();
+    var_dump($error);
+}
 ```
 

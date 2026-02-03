@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace TeslaFleetManagementApiLib\Controllers;
 
-use Core\Authentication\Auth;
 use Core\Request\Parameters\TemplateParam;
 use CoreInterfaces\Core\Request\RequestMethod;
 use TeslaFleetManagementApiLib\Http\ApiResponse;
@@ -27,7 +26,7 @@ class ChargingController extends BaseController
     public function getChargingHistory(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/history')
-            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'));
+            ->auth('thirdpartytoken', 'bearerAuth');
 
         $_resHandler = $this->responseHandler()->type(ChargingHistoryResponse::class)->returnApiResponse();
 
@@ -44,7 +43,7 @@ class ChargingController extends BaseController
     public function getChargingInvoice(string $id): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/invoice/{id}')
-            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'))
+            ->auth('thirdpartytoken', 'bearerAuth')
             ->parameters(TemplateParam::init('id', $id)->required());
 
         $_resHandler = $this->responseHandler()->returnApiResponse();
@@ -60,7 +59,7 @@ class ChargingController extends BaseController
     public function getChargingSessions(): ApiResponse
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/api/1/dx/charging/sessions')
-            ->auth(Auth::and('bearerAuth', 'thirdpartytoken'));
+            ->auth('thirdpartytoken', 'bearerAuth');
 
         $_resHandler = $this->responseHandler()->type(ChargingSessionsResponse::class)->returnApiResponse();
 
